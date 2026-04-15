@@ -1,0 +1,112 @@
+/* Базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Шапка и меню */
+.header {
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Таблица */
+.table-responsive {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: #34495e;
+    color: white;
+}
+
+/* Подвал */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* АДАПТИВ (медиа-запросы) */
+
+/* Планшеты */
+@media (max-width: 768px) {
+    .menu ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+    
+    th, td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+/* Телефоны */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 22px;
+    }
+    
+    th, td {
+        display: block;
+        width: 100%;
+    }
+    
+    th {
+        background: #2c3e50;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+}
