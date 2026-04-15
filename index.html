@@ -3,46 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Адаптивная страница | Личный кабинет</title>
+    <title>Личный кабинет | Судебная система</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
-        <h1>Личный кабинет</h1>
-        <nav class="menu">
-            <ul>
-                <li><a href="#">Главная</a></li>
-                <li><a href="#">Обращения</a></li>
-                <li><a href="#">Проекты</a></li>
-                <li><a href="#">Новости</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1>Личный кабинет</h1>
+            <nav class="menu">
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Мои обращения</a></li>
+                    <li><a href="#">Проекты</a></li>
+                    <li><a href="#">Новости</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main class="container">
+        <!-- Секция обращений -->
         <section class="claims">
             <h2>Мои обращения</h2>
             <div class="table-responsive">
-                <table>
-                    <tr>
-                        <th>№</th>
-                        <th>Дата</th>
-                        <th>Тема</th>
-                        <th>Статус</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>22.04.2024</td>
-                        <td>Тестовое обращение</td>
-                        <td>В работе</td>
-                    </tr>
+                <table class="claims-table">
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Дата</th>
+                            <th>Тема</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>22.04.2024</td>
+                            <td>Техническая проблема с доступом</td>
+                            <td>В обработке</td>
+                            <td><a href="#">Подробнее</a></td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>23.04.2024</td>
+                            <td>Обновление данных</td>
+                            <td>Завершено</td>
+                            <td><a href="#">Подробнее</a></td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td>24.04.2024</td>
+                            <td>Вопрос по документации</td>
+                            <td>Ожидает ответа</td>
+                            <td><a href="#">Подробнее</a></td>
+                        </tr>
+                    </tbody>
                 </table>
+            </div>
+        </section>
+
+        <!-- Секция новостей -->
+        <section class="news">
+            <h2>Новости</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <h3>Обновление системы</h3>
+                    <p>25.04.2024</p>
+                    <p>В личный кабинет добавлены новые функции.</p>
+                </div>
+                <div class="news-card">
+                    <h3>Важное уведомление</h3>
+                    <p>24.04.2024</p>
+                    <p>Изменён порядок подачи обращений.</p>
+                </div>
+                <div class="news-card">
+                    <h3>Плановые работы</h3>
+                    <p>23.04.2024</p>
+                    <p>Система будет недоступна 30.04 с 2:00 до 6:00.</p>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>© 2024 Личный кабинет</p>
+        <div class="container">
+            <p>© 2024 Личный кабинет. Все права защищены.</p>
+            <p>Техническая поддержка: support@example.com</p>
+        </div>
     </footer>
 </body>
-</html>
+</html>s
