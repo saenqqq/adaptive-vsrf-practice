@@ -1,0 +1,41 @@
+/* Базовые стили и обнуление */
+* { margin: 0; padding: 0; box-sizing: border-box;
+} body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5;
+} .container { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 15px;
+} /* Шапка сайта */
+.header { background: #1a3a5c; color: white; padding: 20px 0; position: sticky; top: 0; z-index: 100;
+} .header h1 { font-size: 28px; margin-bottom: 15px;
+} .menu ul { list-style: none; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;
+} .menu a { color: white; text-decoration: none; padding: 5px 10px; transition: 0.3s;
+} .menu a:hover { background: #2c5a7a; border-radius: 5px;
+} /* Секция обращений */
+.claims { background: white; border-radius: 10px; padding: 20px; margin: 30px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+} .claims h2 { margin-bottom: 20px; color: #1a3a5c;
+} .table-responsive { overflow-x: auto;
+} .claims-table { width: 100%; border-collapse: collapse;
+} .claims-table th,
+.claims-table td { border: 1px solid #ddd; padding: 12px; text-align: left;
+} .claims-table th { background: #1a3a5c; color: white;
+} .claims-table tr:nth-child(even) { background: #f9f9f9;
+} .claims-table a { color: #1a3a5c; text-decoration: none;
+} /* Секция новостей */
+.news { margin: 30px 0;
+} .news h2 { margin-bottom: 20px; color: #1a3a5c;
+} .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+} .news-card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s;
+} .news-card:hover { transform: translateY(-5px);
+} .news-card h3 { color: #1a3a5c; margin-bottom: 10px;
+} .news-card p { color: #666;
+} /* Подвал */
+.footer { background: #1a3a5c; color: white; text-align: center; padding: 30px 0; margin-top: 40px;
+} .footer p { margin: 5px 0;
+} /* ======================================== */
+/* АДАПТИВНАЯ ВЁРСТКА (медиа-запросы) */
+/* ======================================== */ /* Планшеты (ширина 768px и меньше) */
+@media (max-width: 768px) { .header h1 { font-size: 24px; text-align: center; } .menu ul { flex-direction: column; align-items: center; gap: 10px; } .claims-table th, .claims-table td { padding: 8px; font-size: 14px; } .news-grid { grid-template-columns: 1fr; }
+} /* Телефоны (ширина 480px и меньше) */
+@media (max-width: 480px) { body { font-size: 14px; } .header h1 { font-size: 20px; } .claims { padding: 15px; } .claims-table th, .claims-table td { display: block; width: 100%; } .claims-table th { background: #2c5a7a; } .claims-table td { border-top: none; } .news-card { padding: 15px; } .container { padding: 0 10px; } .footer { font-size: 12px; }
+}
+/* Телефоны (ширина 480px и меньше) */
+@media (max-width: 480px) { body { font-size: 14px; } .header h1 { font-size: 20px; } .claims { padding: 15px; } .claims-table th, .claims-table td { display: block; width: 100%; } .claims-table th { background: #2c5a7a; } .claims-table td { border-top: none; } .news-card { padding: 15px; } .container { padding: 0 10px; } .footer { font-size: 12px; }
+}
