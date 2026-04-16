@@ -216,43 +216,147 @@ body {
         font-size: 12px;
     }
 }
-/* Телефоны (ширина 480px и меньше) */
-@media (max-width: 480px) {
-    body {
-        font-size: 14px;
-    }
-    
-    .header h1 {
-        font-size: 20px;
-    }
-    
-    .claims {
-        padding: 15px;
-    }
-    
-    .claims-table th,
-    .claims-table td {
-        display: block;
-        width: 100%;
-    }
-    
-    .claims-table th {
-        background: #2c5a7a;
-    }
-    
-    .claims-table td {
-        border-top: none;
-    }
-    
-    .news-card {
-        padding: 15px;
-    }
-    
-    .container {
-        padding: 0 10px;
-    }
-    
-    .footer {
-        font-size: 12px;
-    }
+
+/* ======================================== */
+/* СТИЛИ ДЛЯ ПОИСКА ПО БАЗЕ УГОЛОВНЫХ ДЕЛ   */
+/* ======================================== */
+
+.search-section {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-section h2 {
+    color: #1a3a5c;
+    margin-bottom: 10px;
+}
+
+.search-description {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.search-form {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.search-fields {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #1a3a5c;
+    box-shadow: 0 0 5px rgba(26,58,92,0.3);
+}
+
+.search-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #1a3a5c;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2c5a7a;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+/* Результаты поиска */
+.search-results {
+    margin-top: 20px;
+}
+
+.result-card {
+    background: #f8f9fa;
+    border-left: 4px solid #1a3a5c;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.result-card h3 {
+    color: #1a3a5c;
+    margin-bottom: 10px;
+}
+
+.result-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.result-detail {
+    font-size: 14px;
+}
+
+.result-detail strong {
+    color: #333;
+}
+
+.no-results {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.error-message {
+    color: #dc3545;
+    padding: 10px;
+    background: #f8d7da;
+    border-radius: 5px;
+    text-align: center;
 }

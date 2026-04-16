@@ -5,6 +5,353 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный кабинет | Судебная система</title>
     <link rel="stylesheet" href="style.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 90%;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ШАПКА */
+        .header {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1a3a5c 100%);
+            color: white;
+            padding: 30px 0;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1::before {
+            content: "⚖️";
+            font-size: 40px;
+        }
+
+        .menu ul {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .menu li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .menu li a:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        /* КАРТОЧКИ ОБРАЩЕНИЙ */
+        .claims-section {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a3a5c;
+            margin-bottom: 20px;
+            border-left: 4px solid #1a3a5c;
+            padding-left: 15px;
+        }
+
+        .claims-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .claim-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .claim-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .claim-number {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .claim-number span {
+            background: #e9ecef;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .claim-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a3a5c;
+            margin-bottom: 12px;
+        }
+
+        .claim-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .status-processing { background: #fff3cd; color: #856404; }
+        .status-completed { background: #d4edda; color: #155724; }
+        .status-waiting { background: #cce5ff; color: #004085; }
+
+        /* ПОИСК */
+        .search-section {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .search-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a3a5c;
+            margin-bottom: 10px;
+        }
+
+        .search-form {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .search-fields {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a3a5c;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #1a3a5c;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5a7a 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26,58,92,0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        /* РЕЗУЛЬТАТЫ ПОИСКА (ПОЛНОЕ ДОСЬЕ) */
+        .search-results {
+            margin-top: 20px;
+        }
+
+        .dossier-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 20px;
+            padding: 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        .dossier-header {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5a7a 100%);
+            color: white;
+            padding: 15px 20px;
+        }
+
+        .dossier-header h3 {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .dossier-body {
+            padding: 20px;
+        }
+
+        .dossier-section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 15px;
+        }
+
+        .dossier-section h4 {
+            color: #1a3a5c;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .dossier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .dossier-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dossier-item strong {
+            color: #1a3a5c;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dossier-item span {
+            font-size: 14px;
+            color: #333;
+            margin-top: 4px;
+        }
+
+        .crime-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .crime-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 14px;
+        }
+
+        .crime-list li:last-child {
+            border-bottom: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            background: #f8f9fa;
+            border-radius: 16px;
+        }
+
+        .error-message {
+            color: #dc3545;
+            padding: 15px;
+            background: #f8d7da;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        /* НОВОСТИ */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1a3a5c 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 30px 30px 0 0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .menu ul { flex-direction: column; align-items: center; }
+            .search-fields { flex-direction: column; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -14,6 +361,7 @@
                 <ul>
                     <li><a href="#">Главная</a></li>
                     <li><a href="#">Мои обращения</a></li>
+                    <li><a href="#">Поиск дел</a></li>
                     <li><a href="#">Проекты</a></li>
                     <li><a href="#">Новости</a></li>
                     <li><a href="#">Контакты</a></li>
@@ -23,59 +371,351 @@
     </header>
 
     <main class="container">
-        <section class="claims">
-            <h2>Мои обращения</h2>
-            <div class="table-responsive">
-                <table class="claims-table">
-                    <thead>
-                        <tr>
-                            <th>№</th>
-                            <th>Дата</th>
-                            <th>Тема</th>
-                            <th>Статус</th>
-                            <th>Действия</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>001</td>
-                            <td>22.04.2026</td>
-                            <td>Техническая проблема с доступом</td>
-                            <td>В обработке</td>
-                            <td><a href="#">Подробнее</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- Мои обращения -->
+        <section class="claims-section">
+            <h2 class="section-title">Мои обращения</h2>
+            <div class="claims-grid">
+                <div class="claim-card">
+                    <div class="claim-number"><span>№ 001</span></div>
+                    <div class="claim-title">Техническая проблема с доступом</div>
+                    <div class="claim-status status-processing">⏳ В обработке</div>
+                    <a href="#" class="claim-link">Подробнее →</a>
+                </div>
+                <div class="claim-card">
+                    <div class="claim-number"><span>№ 002</span></div>
+                    <div class="claim-title">Обновление данных</div>
+                    <div class="claim-status status-completed">✅ Завершено</div>
+                    <a href="#" class="claim-link">Подробнее →</a>
+                </div>
+                <div class="claim-card">
+                    <div class="claim-number"><span>№ 003</span></div>
+                    <div class="claim-title">Вопрос по документации</div>
+                    <div class="claim-status status-waiting">⏰ Ожидает ответа</div>
+                    <a href="#" class="claim-link">Подробнее →</a>
+                </div>
             </div>
         </section>
 
-        <section class="news">
-            <h2>Новости</h2>
+        <!-- Поиск -->
+        <section class="search-section">
+            <h2 class="search-title">🔍 Поиск по базе уголовных дел</h2>
+            <p>Введите номер дела или фамилию обвиняемого — получите полное досье</p>
+            
+            <div class="search-form">
+                <div class="search-fields">
+                    <div class="input-group">
+                        <label for="caseNumber">📁 Номер дела</label>
+                        <input type="text" id="caseNumber" placeholder="Пример: 1-22/2024">
+                    </div>
+                    <div class="input-group">
+                        <label for="fullName">👤 Фамилия обвиняемого</label>
+                        <input type="text" id="fullName" placeholder="Пример: Сидоров">
+                    </div>
+                </div>
+                <div class="search-buttons">
+                    <button id="searchBtn" class="btn btn-primary">🔍 Найти досье</button>
+                    <button id="resetBtn" class="btn btn-secondary">🗑️ Очистить</button>
+                </div>
+            </div>
+
+            <div id="searchResults" class="search-results">
+                <div class="no-results">🔍 Введите номер дела или фамилию для поиска</div>
+            </div>
+        </section>
+
+        <!-- Новости -->
+        <section class="news-section">
+            <h2 class="section-title">Новости</h2>
             <div class="news-grid">
-                <div class="news-card">
-                    <h3>Обновление системы</h3>
-                    <p>25.04.2026</p>
-                    <p>В личный кабинет добавлены новые функции.</p>
-                </div>
-                <div class="news-card">
-                    <h3>Важное уведомление</h3>
-                    <p>24.04.2026</p>
-                    <p>Изменён порядок подачи обращений.</p>
-                </div>
-                <div class="news-card">
-                    <h3>Плановые работы</h3>
-                    <p>23.04.2026</p>
-                    <p>Система будет недоступна 30.04 с 2:00 до 6:00.</p>
-                </div>
+                <div class="news-card"><h3>Обновление системы</h3><p>Добавлен поиск с полным досье</p></div>
+                <div class="news-card"><h3>Важное уведомление</h3><p>Изменён порядок подачи обращений</p></div>
+                <div class="news-card"><h3>Плановые работы</h3><p>Система будет недоступна 30.04</p></div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>© 2024 Личный кабинет. Все права защищены.</p>
-            <p>Техническая поддержка: support@example.com</p>
-        </div>
+        <p>© 2024 Личный кабинет судебной системы</p>
     </footer>
+
+    <script>
+        // ========== БАЗА ДАННЫХ УГОЛОВНЫХ ДЕЛ (ПОЛНЫЕ ДОСЬЕ) ==========
+        const criminalCases = [
+            {
+                caseNumber: "1-22/2024",
+                defendant: "Сидоров Петр Алексеевич",
+                defendantBirth: "15.03.1985",
+                defendantAddress: "г. Салават, ул. Ленина, д. 15, кв. 78",
+                victim: "ООО 'Ромашка'",
+                victimAddress: "г. Салават, ул. Промышленная, д. 5",
+                article: "ст. 159 УК РФ (мошенничество)",
+                articleDescription: "Хищение чужого имущества путем обмана или злоупотребления доверием",
+                status: "В суде",
+                judge: "Иванова Анна Алексеевна",
+                court: "Салаватский городской суд",
+                startDate: "15.03.2024",
+                hearingDates: ["22.04.2024", "06.05.2024", "20.05.2024"],
+                prosecutor: "Петров В.И.",
+                lawyer: "Смирнова Е.А.",
+                evidence: [
+                    "Договор купли-продажи",
+                    "Показания свидетелей (3 чел.)",
+                    "Выписки с расчетных счетов"
+                ],
+                sentence: "Ожидается вынесение приговора"
+            },
+            {
+                caseNumber: "1-45/2024",
+                defendant: "Козлова Мария Ивановна",
+                defendantBirth: "22.07.1990",
+                defendantAddress: "г. Салават, ул. Гагарина, д. 8, кв. 12",
+                victim: "Петрова Елена Сергеевна",
+                victimAddress: "г. Салават, ул. Мира, д. 3, кв. 45",
+                article: "ст. 158 УК РФ (кража)",
+                articleDescription: "Тайное хищение чужого имущества",
+                status: "Приговор вынесен",
+                judge: "Смирнов Владимир Владимирович",
+                court: "Салаватский городской суд",
+                startDate: "10.02.2024",
+                hearingDates: ["12.03.2024", "28.03.2024", "10.04.2024"],
+                prosecutor: "Иванов А.А.",
+                lawyer: "Михайлова О.В.",
+                evidence: [
+                    "Запись камер видеонаблюдения",
+                    "Отпечатки пальцев",
+                    "Показания свидетелей"
+                ],
+                sentence: "2 года условно с испытательным сроком 1.5 года"
+            },
+            {
+                caseNumber: "1-78/2024",
+                defendant: "Волков Дмитрий Сергеевич",
+                defendantBirth: "03.11.1982",
+                defendantAddress: "г. Салават, ул. Строителей, д. 22, кв. 5",
+                victim: "ИП 'Успех'",
+                victimAddress: "г. Салават, ул. Коммерческая, д. 10",
+                article: "ст. 160 УК РФ (присвоение)",
+                articleDescription: "Присвоение вверенного имущества",
+                status: "Расследуется",
+                judge: "Не назначен",
+                court: "Салаватский городской суд",
+                startDate: "01.04.2024",
+                hearingDates: [],
+                prosecutor: "Кузнецов Д.М.",
+                lawyer: "Новикова Т.П.",
+                evidence: [
+                    "Финансовые документы",
+                    "Акт ревизии",
+                    "Объяснительные сотрудников"
+                ],
+                sentence: "Расследование не завершено"
+            },
+            {
+                caseNumber: "1-12/2024",
+                defendant: "Новикова Анна Владимировна",
+                defendantBirth: "17.05.1988",
+                defendantAddress: "г. Стерлитамак, ул. Советская, д. 45, кв. 8",
+                victim: "ПАО 'Сбербанк'",
+                victimAddress: "г. Москва, ул. Вавилова, д. 19",
+                article: "ст. 159.3 УК РФ (мошенничество с использованием электронных средств)",
+                articleDescription: "Мошенничество с использованием платежных карт",
+                status: "Назначено заседание",
+                judge: "Морозова Екатерина Александровна",
+                court: "Стерлитамакский городской суд",
+                startDate: "20.01.2024",
+                hearingDates: ["15.02.2024", "05.03.2024", "25.03.2024", "15.04.2024"],
+                prosecutor: "Соколов И.В.",
+                lawyer: "Белова А.С.",
+                evidence: [
+                    "Выписки по счетам",
+                    "IP-адреса транзакций",
+                    "Показания специалистов"
+                ],
+                sentence: "Ожидается оглашение приговора"
+            },
+            {
+                caseNumber: "1-99/2023",
+                defendant: "Морозов Иван Петрович",
+                defendantBirth: "09.09.1975",
+                defendantAddress: "г. Ишимбай, ул. Нефтяников, д. 7, кв. 32",
+                victim: "Гражданин Петров П.П.",
+                victimAddress: "г. Ишимбай, ул. Заводская, д. 2, кв. 15",
+                article: "ст. 111 УК РФ (причинение тяжкого вреда здоровью)",
+                articleDescription: "Умышленное причинение тяжкого вреда здоровью",
+                status: "Отбывает наказание",
+                judge: "Лебедев Андрей Андреевич",
+                court: "Ишимбайский городской суд",
+                startDate: "10.12.2023",
+                hearingDates: ["15.01.2024", "30.01.2024", "12.02.2024"],
+                prosecutor: "Михайлов С.С.",
+                lawyer: "Григорьева Л.Н.",
+                evidence: [
+                    "Заключение судмедэкспертизы",
+                    "Орудие преступления",
+                    "Показания очевидцев"
+                ],
+                sentence: "4 года лишения свободы в колонии общего режима"
+            },
+            {
+                caseNumber: "1-33/2024",
+                defendant: "Соколова Екатерина Дмитриевна",
+                defendantBirth: "25.12.1995",
+                defendantAddress: "г. Салават, ул. Южная, д. 12, кв. 3",
+                victim: "Магазин 'Электроника'",
+                victimAddress: "г. Салават, ТЦ 'Весна', 2 этаж",
+                article: "ст. 161 УК РФ (грабёж)",
+                articleDescription: "Открытое хищение чужого имущества",
+                status: "В суде",
+                judge: "Иванова Анна Алексеевна",
+                court: "Салаватский городской суд",
+                startDate: "05.03.2024",
+                hearingDates: ["10.04.2024", "24.04.2024"],
+                prosecutor: "Петров В.И.",
+                lawyer: "Семенов Д.А.",
+                evidence: [
+                    "Запись с камер магазина",
+                    "Показания продавцов",
+                    "Изъятый товар"
+                ],
+                sentence: "Ожидается вынесение приговора"
+            }
+        ];
+
+        // ФУНКЦИЯ ПОИСКА
+        function searchCases(caseNumber, fullName) {
+            if (!caseNumber && !fullName) {
+                return { error: "Введите номер дела или фамилию обвиняемого" };
+            }
+            
+            let results = [];
+            
+            for (let i = 0; i < criminalCases.length; i++) {
+                const caseItem = criminalCases[i];
+                let match = false;
+                
+                if (caseNumber && caseItem.caseNumber.toLowerCase().includes(caseNumber.toLowerCase())) {
+                    match = true;
+                }
+                
+                if (fullName && caseItem.defendant.toLowerCase().includes(fullName.toLowerCase())) {
+                    match = true;
+                }
+                
+                if (match) {
+                    results.push(caseItem);
+                }
+            }
+            
+            if (results.length === 0) {
+                return { error: "Дело не найдено. Проверьте номер дела или фамилию." };
+            }
+            
+            return results;
+        }
+
+        // ФУНКЦИЯ ОТОБРАЖЕНИЯ ПОЛНОГО ДОСЬЕ
+        function displayDossier(results) {
+            const container = document.getElementById('searchResults');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (results.error) {
+                container.innerHTML = `<div class="error-message">⚠️ ${results.error}</div>`;
+                return;
+            }
+            
+            for (let i = 0; i < results.length; i++) {
+                const c = results[i];
+                const hearingHtml = c.hearingDates.length > 0 
+                    ? `<ul class="crime-list" style="margin-top:5px;">${c.hearingDates.map(d => `<li>📅 ${d}</li>`).join('')}</ul>`
+                    : '<p>Даты заседаний не назначены</p>';
+                
+                const evidenceHtml = c.evidence.length > 0
+                    ? `<ul class="crime-list" style="margin-top:5px;">${c.evidence.map(e => `<li>📄 ${e}</li>`).join('')}</ul>`
+                    : '<p>Доказательства не указаны</p>';
+                
+                container.innerHTML += `
+                    <div class="dossier-card">
+                        <div class="dossier-header">
+                            <h3>⚖️ ДОСЬЕ № ${c.caseNumber}</h3>
+                        </div>
+                        <div class="dossier-body">
+                            <div class="dossier-section">
+                                <h4>👤 ИНФОРМАЦИЯ ОБ ОБВИНЯЕМОМ</h4>
+                                <div class="dossier-grid">
+                                    <div class="dossier-item"><strong>ФИО</strong><span>${c.defendant}</span></div>
+                                    <div class="dossier-item"><strong>Дата рождения</strong><span>${c.defendantBirth}</span></div>
+                                    <div class="dossier-item"><strong>Адрес</strong><span>${c.defendantAddress}</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="dossier-section">
+                                <h4>👥 ИНФОРМАЦИЯ О ПОТЕРПЕВШЕМ</h4>
+                                <div class="dossier-grid">
+                                    <div class="dossier-item"><strong>Наименование</strong><span>${c.victim}</span></div>
+                                    <div class="dossier-item"><strong>Адрес</strong><span>${c.victimAddress}</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="dossier-section">
+                                <h4>📜 ИНФОРМАЦИЯ О ПРЕСТУПЛЕНИИ</h4>
+                                <div class="dossier-item"><strong>Статья</strong><span>${c.article}</span></div>
+                                <div class="dossier-item" style="margin-top:8px;"><strong>Описание</strong><span>${c.articleDescription}</span></div>
+                            </div>
+                            
+                            <div class="dossier-section">
+                                <h4>⚖️ ХОД РАССМОТРЕНИЯ</h4>
+                                <div class="dossier-grid">
+                                    <div class="dossier-item"><strong>Статус</strong><span>${c.status}</span></div>
+                                    <div class="dossier-item"><strong>Суд</strong><span>${c.court}</span></div>
+                                    <div class="dossier-item"><strong>Судья</strong><span>${c.judge}</span></div>
+                                    <div class="dossier-item"><strong>Прокурор</strong><span>${c.prosecutor}</span></div>
+                                    <div class="dossier-item"><strong>Адвокат</strong><span>${c.lawyer}</span></div>
+                                    <div class="dossier-item"><strong>Дата возбуждения</strong><span>${c.startDate}</span></div>
+                                </div>
+                                <div style="margin-top:12px;">
+                                    <strong>📅 Даты заседаний:</strong>
+                                    ${hearingHtml}
+                                </div>
+                            </div>
+                            
+                            <div class="dossier-section">
+                                <h4>🔍 ДОКАЗАТЕЛЬСТВА</h4>
+                                ${evidenceHtml}
+                            </div>
+                            
+                            <div class="dossier-section">
+                                <h4>📋 ПРИГОВОР / РЕШЕНИЕ</h4>
+                                <div class="dossier-item"><span>${c.sentence}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // ПОИСК
+        function performSearch() {
+            const caseNumber = document.getElementById('caseNumber')?.value.trim() || '';
+            const fullName = document.getElementById('fullName')?.value.trim() || '';
+            const results = searchCases(caseNumber, fullName);
+            displayDossier(results);
+        }
+
+        // ОЧИСТКА
+        function resetSearch() {
+            document.getElementById('caseNumber').value = '';
+            document.getElementById('fullName').value = '';
+            document.getElementById('searchResults').innerHTML = '<div class="no-results">🔍 Введите номер дела или фамилию для поиска</div>';
+        }
+
+        // ЗАПУСК
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('searchBtn').addEventListener('click', performSearch);
+            document.getElementById('resetBtn').addEventListener('click', resetSearch);
+            console.log("Поиск уголовных дел загружен. Доступно дел: " + criminalCases.length);
+        });
+    </script>
 </body>
 </html>
